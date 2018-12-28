@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>Kharosthi-Arabic Numeral Converter</title>
+<script src="kharosthiNumerals.js"></script>
+<script src="kharosthiNumerals.test.js"></script>
+<style>
+    @font-face {
+        font-family: "NotoSansKharoshthi-unhinted";
+        src: url("NotoSansKharoshthi-unhinted/NotoSansKharoshthi-Regular.ttf");
+    }
+</style>
+<input id="arabic" placeholder="arabic" />
+⇄
+<input id="kharosthi" placeholder="kharosthi" style="font-family: NotoSansKharoshthi-unhinted; direction: rtl"  />
+
+<script>
+    const events = ["change", "input", "paste"];
+    events.forEach((event) => {
+        document.getElementById('arabic').addEventListener(event, (event) => {
+            try {
+                document.getElementById('kharosthi').value = kharosthi.fromInt(parseInt(event.currentTarget.value));
+            } catch (error) {
+                document.getElementById('kharosthi').value = "NaN";
+            }
+        });
+
+        document.getElementById('kharosthi').addEventListener(event, (event) => {
+            try {
+                document.getElementById('arabic').value = kharosthi.toInt(event.currentTarget.value);
+            } catch (error) {
+                document.getElementById('arabic').value = "NaN";
+            }
+        }); 
+    });
+</script>
